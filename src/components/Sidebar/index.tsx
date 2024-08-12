@@ -25,6 +25,7 @@ import sx from './styles';
 
 type SidebarProps = {
     onClose: () => void;
+    onNavigate?: () => void;
     width: CSSProperties['width'];
 };
 
@@ -111,7 +112,10 @@ export default function Sidebar(props: SidebarProps) {
                             <ListItemButton
                                 sx={sx.listItemButton}
                                 selected={pathname === route.path}
-                                onClick={() => navigate(route.path)}
+                                onClick={() => {
+                                    navigate(route.path);
+                                    props.onNavigate?.();
+                                }}
                             >
                                 <ListItemIcon sx={sx.listItemIcon}>
                                     <Icon>{route.icon}</Icon>
