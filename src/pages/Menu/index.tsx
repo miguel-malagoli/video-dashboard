@@ -16,6 +16,7 @@ export default function Menu() {
         <>
             <Drawer
                 open={sidebar.isOpenMobile}
+                onClose={() => sidebar.setIsOpenMobile(false)}
                 variant="temporary"
                 sx={{
                     display: { xs: 'block', lg: 'none' },
@@ -27,6 +28,7 @@ export default function Menu() {
             >
                 <Sidebar
                     width={sidebarWidth}
+                    onNavigate={() => sidebar.setIsOpenMobile(false)}
                     onClose={() => sidebar.setIsOpenMobile(false)}
                 />
             </Drawer>

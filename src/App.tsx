@@ -42,6 +42,24 @@ themeGray = createTheme(themeGray, {
             lineHeight: '40px',
             fontWeight: '700',
             color: themeGray.palette.text.primary
+        },
+        h2: {
+            fontSize: '20px',
+            lineHeight: '32px',
+            fontWeight: '500',
+            color: themeGray.palette.text.primary
+        },
+        body1: {
+            fontSize: '14px',
+            lineHeight: '24px',
+            fontWeight: '400',
+            color: themeGray.palette.text.primary
+        },
+        body2: {
+            fontSize: '14px',
+            lineHeight: '24px',
+            fontWeight: '500',
+            color: themeGray.palette.text.secondary
         }
     },
     components: {
