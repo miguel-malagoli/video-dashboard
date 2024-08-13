@@ -1,6 +1,33 @@
 import { SxClasses } from 'src/utils/styles';
 
 const sx: SxClasses = {
+    baseContainer: (theme) => ({
+        pt: 2,
+        px: 3,
+        pb: 3,
+        [theme.breakpoints.up('md')]: {
+            px: 4,
+            pb: 4
+        },
+        [theme.breakpoints.up('lg')]: {
+            pt: 4,
+            px: 8,
+            pb: 8
+        }
+    }),
+    titleFlex: {
+        alignItems: 'center',
+        my: 2.5,
+        pb: 2
+    },
+    sidebarButton: {
+        width: 40,
+        height: 40,
+        color: 'text.secondary',
+        border: 1,
+        borderColor: 'text.secondary',
+        mr: 2
+    },
     onboardingContainer: (theme) => ({
         pt: 4,
         px: 3,
@@ -36,29 +63,23 @@ const sx: SxClasses = {
         bgcolor: 'primary.main',
         borderRadius: '8px'
     },
-    baseContainer: (theme) => ({
-        py: 2,
-        px: 3,
-        [theme.breakpoints.up('md')]: {
-            px: 4
-        },
-        [theme.breakpoints.up('lg')]: {
-            py: 4,
-            px: 8
-        }
-    }),
-    titleFlex: {
-        alignItems: 'center',
-        my: 2.5,
-        pb: 2
+    filterFeedbackContainer: {
+        alignItems: 'stretch',
+        width: '100%'
     },
-    sidebarButton: {
-        width: 40,
-        height: 40,
-        color: 'text.secondary',
-        border: 1,
-        borderColor: 'text.secondary',
-        mr: 2
+    filterFeedbackText: {
+        fontSize: '16px',
+        lineHeight: '20px',
+        fontWeight: '500',
+        color: 'text.primary',
+        textAlign: 'center',
+        mb: 1
+    },
+    videoGrid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+        gap: '16px',
+        marginTop: '16px'
     }
 };
 

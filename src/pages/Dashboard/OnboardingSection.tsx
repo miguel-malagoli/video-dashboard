@@ -64,7 +64,7 @@ const steps = [
 
 export default function OnboardingSection() {
     return (
-        <Box sx={sx.onboardingContainer}>
+        <Box component="section" sx={sx.onboardingContainer}>
             <Typography variant="h2" sx={sx.onboardingWelcome}>
                 Hey John, welcome to Pactto!
             </Typography>
