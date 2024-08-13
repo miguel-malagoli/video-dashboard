@@ -9,7 +9,8 @@ export default defineConfig({
             '@assets': '/src/assets',
             '@components': '/src/components',
             '@contexts': '/src/contexts',
-            '@pages': '/src/pages'
+            '@pages': '/src/pages',
+            '@utils': '/src/utils'
         }
     }
 });

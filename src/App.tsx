@@ -23,6 +23,10 @@ let themeGray = createTheme({
             primary: '#ffffff',
             secondary: '#b8b8b8',
             disabled: '#545454'
+        },
+        common: {
+            black: '#121212',
+            white: '#ffffff'
         }
     },
     breakpoints: {
@@ -48,6 +52,19 @@ themeGray = createTheme(themeGray, {
             lineHeight: '32px',
             fontWeight: '500',
             color: themeGray.palette.text.primary
+        },
+        h3: {
+            fontSize: '17px',
+            lineHeight: '20px',
+            fontWeight: '400',
+            color: themeGray.palette.text.primary
+        },
+        subtitle1: {
+            fontSize: '12px',
+            lineHeight: '12px',
+            fontWeight: '400',
+            letterSpacing: '0.22px',
+            color: themeGray.palette.text.secondary
         },
         body1: {
             fontSize: '14px',
