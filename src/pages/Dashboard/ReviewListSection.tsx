@@ -17,21 +17,34 @@ import { SidebarContext } from '@contexts/SidebarContext';
 // utils
 import { mockResponseTime } from '@utils/mockResponseTime';
 import { VideoData } from '@utils/data';
+import { sortByDate } from '@utils/sorters';
 // local
 import { mockReviewList } from './mockData';
 import sx from './styles';
+import UploadModal from './UploadModal';
+import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
+import ShareModal from './ShareModal';
+
+type VideoAction = {
+    action: 'edit' | 'share' | 'delete';
+    video: VideoData;
+};
 
 export default function ReviewListSection() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [fullVideoList] = useState<VideoData[]>(mockReviewList);
+    const [fullVideoList, setFullVideoList] =
+        useState<VideoData[]>(mockReviewList);
     const [filteredVideoList, setFilteredVideoList] =
         useState<VideoData[]>(mockReviewList);
-    const [loading, setLoading] = useState(false);
+    const [uploadFile, setUploadFile] = useState<File | undefined>();
+    const [videoAction, setVideoAction] = useState<VideoAction | undefined>();
+    const [loadingList, setLoadingList] = useState(false);
 
     const sidebar = useContext(SidebarContext);
 
     const filterList = useCallback(async () => {
-        setLoading(true);
+        setLoadingList(true);
         setFilteredVideoList(
             fullVideoList.filter((video) => {
                 const regex = new RegExp(searchQuery, 'i');
@@ -42,8 +55,8 @@ export default function ReviewListSection() {
                 );
             })
         );
-        await mockResponseTime(1500);
-        setLoading(false);
+        await mockResponseTime(500);
+        setLoadingList(false);
     }, [searchQuery, fullVideoList]);
 
     useEffect(() => {
@@ -94,35 +107,87 @@ export default function ReviewListSection() {
                 }}
                 sx={{ mb: 4 }}
             />
-            {loading && (
-                <Box flexColumn sx={sx.filterFeedbackContainer}>
-                    <Typography sx={sx.filterFeedbackText}>
-                        Loading...
-                    </Typography>
+            {loadingList && (
+                <Box flexColumn sx={sx.loadingContainer}>
+                    <Typography sx={sx.loadingText}>Loading...</Typography>
                     <LinearProgress />
                 </Box>
             )}
-            {!loading && !!searchQuery && filteredVideoList?.length <= 0 && (
-                <Box flexColumn sx={sx.filterFeedbackContainer}>
-                    <Typography sx={sx.filterFeedbackText}>
-                        No videos found
-                    </Typography>
-                </Box>
-            )}
-            {!loading && filteredVideoList?.length > 0 && (
+            {!loadingList &&
+                !!searchQuery &&
+                filteredVideoList?.length <= 0 && (
+                    <Box flexColumn sx={sx.loadingContainer}>
+                        <Typography sx={sx.loadingText}>
+                            No videos found
+                        </Typography>
+                    </Box>
+                )}
+            {!loadingList && filteredVideoList?.length > 0 && (
                 <Box sx={sx.videoGrid}>
                     {filteredVideoList.map((data) => (
                         <VideoCard
                             key={data.id}
                             data={data}
                             onView={() => {}}
-                            onEdit={() => {}}
-                            onShare={() => {}}
-                            onDelete={() => {}}
+                            onEdit={() =>
+                                setVideoAction({ video: data, action: 'edit' })
+                            }
+                            onShare={() =>
+                                setVideoAction({ video: data, action: 'share' })
+                            }
+                            onDelete={() =>
+                                setVideoAction({
+                                    video: data,
+                                    action: 'delete'
+                                })
+                            }
                         />
                     ))}
                 </Box>
             )}
+            <UploadModal
+                open={!!uploadFile}
+                file={uploadFile}
+                onCancel={() => setUploadFile(undefined)}
+                onSave={(newVideo) => {
+                    setFullVideoList(
+                        [...fullVideoList, newVideo].sort(sortByDate)
+                    );
+                    setUploadFile(undefined);
+                }}
+            />
+            <EditModal
+                open={videoAction?.action === 'edit'}
+                videoData={videoAction?.video}
+                onCancel={() => setVideoAction(undefined)}
+                onSave={(newVideo) => {
+                    setFullVideoList(
+                        fullVideoList.map((video) =>
+                            video.id === newVideo.id ? newVideo : video
+                        )
+                    );
+                    setVideoAction(undefined);
+                }}
+            />
+            <DeleteModal
+                open={videoAction?.action === 'delete'}
+                videoData={videoAction?.video}
+                onCancel={() => setVideoAction(undefined)}
+                onDelete={(deletedVideo) => {
+                    setFullVideoList(
+                        fullVideoList.filter(
+                            (video) => video.id !== deletedVideo.id
+                        )
+                    );
+                    setVideoAction(undefined);
+                }}
+            />
+            <ShareModal
+                open={videoAction?.action === 'share'}
+                videoData={videoAction?.video}
+                onCancel={() => setVideoAction(undefined)}
+                onShare={() => {}}
+            />
         </Box>
     );
 }
