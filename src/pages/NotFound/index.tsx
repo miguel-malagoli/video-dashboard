@@ -1,8 +1,11 @@
+// 3rd party
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+// components
 import Box from '@components/Box';
 import Typography from '@components/Typography';
-import { Button } from '@mui/material';
+// local
 import sx from './styles';
-import { useNavigate } from 'react-router-dom';
 
 export default function NotFound() {
     const navigate = useNavigate();
