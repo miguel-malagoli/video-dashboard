@@ -1,7 +1,14 @@
 // react
 import { useCallback, useEffect, useState } from 'react';
 // 3rd party
-import { Icon, InputAdornment, LinearProgress, TextField } from '@mui/material';
+import {
+    Icon,
+    IconButton,
+    InputAdornment,
+    LinearProgress,
+    Snackbar,
+    TextField
+} from '@mui/material';
 // components
 import VideoCard from '@components/VideoCard';
 import Box from '@components/Box';
@@ -31,6 +38,7 @@ export default function ReviewListSection() {
         useState<VideoData[]>(mockReviewList);
     const [uploadFile, setUploadFile] = useState<File | undefined>();
     const [videoAction, setVideoAction] = useState<VideoAction | undefined>();
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [loadingList, setLoadingList] = useState(false);
 
     const filterList = useCallback(async () => {
@@ -146,6 +154,7 @@ export default function ReviewListSection() {
                         )
                     );
                     setVideoAction(undefined);
+                    setSnackbarMessage('Item removed successfully');
                 }}
             />
             <ShareModal
@@ -153,6 +162,26 @@ export default function ReviewListSection() {
                 videoData={videoAction?.video}
                 onCancel={() => setVideoAction(undefined)}
                 onShare={() => {}}
+            />
+            <Snackbar
+                open={!!snackbarMessage}
+                autoHideDuration={5000}
+                onClose={() => setSnackbarMessage('')}
+                message={snackbarMessage}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
+                action={
+                    <IconButton
+                        size="small"
+                        aria-label="close"
+                        color="inherit"
+                        onClick={() => setSnackbarMessage('')}
+                    >
+                        <Icon>close</Icon>
+                    </IconButton>
+                }
             />
         </Box>
     );
