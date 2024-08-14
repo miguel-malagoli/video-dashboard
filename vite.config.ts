@@ -12,5 +12,6 @@ export default defineConfig({
             '@pages': '/src/pages',
             '@utils': '/src/utils'
         }
-    }
+    },
+    base: '/video-dashboard/'
 });
