@@ -1,19 +1,11 @@
 // react
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // 3rd party
-import {
-    Icon,
-    IconButton,
-    InputAdornment,
-    LinearProgress,
-    TextField
-} from '@mui/material';
+import { Icon, InputAdornment, LinearProgress, TextField } from '@mui/material';
 // components
 import VideoCard from '@components/VideoCard';
 import Box from '@components/Box';
 import Typography from '@components/Typography';
-// contexts
-import { SidebarContext } from '@contexts/SidebarContext';
 // utils
 import { mockResponseTime } from '@utils/mockResponseTime';
 import { VideoData } from '@utils/data';
@@ -41,8 +33,6 @@ export default function ReviewListSection() {
     const [videoAction, setVideoAction] = useState<VideoAction | undefined>();
     const [loadingList, setLoadingList] = useState(false);
 
-    const sidebar = useContext(SidebarContext);
-
     const filterList = useCallback(async () => {
         setLoadingList(true);
         setFilteredVideoList(
@@ -67,30 +57,6 @@ export default function ReviewListSection() {
     return (
         <Box component="section" sx={sx.baseContainer}>
             <Box flexBox sx={sx.titleFlex}>
-                <IconButton
-                    aria-label="open navigation"
-                    onClick={() => sidebar.setIsOpenMobile(true)}
-                    sx={[sx.sidebarButton, { display: { lg: 'none' } }]}
-                >
-                    <Icon>menu</Icon>
-                </IconButton>
-                <IconButton
-                    aria-label="open navigation"
-                    onClick={() => sidebar.setIsOpenDesktop(true)}
-                    sx={[
-                        sx.sidebarButton,
-                        {
-                            display: {
-                                xs: 'none',
-                                lg: sidebar.isOpenDesktop
-                                    ? 'none'
-                                    : 'inline-flex'
-                            }
-                        }
-                    ]}
-                >
-                    <Icon>menu</Icon>
-                </IconButton>
                 <Typography variant="h1">Reviews by me</Typography>
             </Box>
             <TextField
