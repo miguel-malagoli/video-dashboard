@@ -2,6 +2,7 @@
 import MuiBox, { BoxProps as MuiBoxProps } from '@mui/material/Box';
 // local
 import sx from './styles';
+import { forwardRef } from 'react';
 
 type BoxProps = MuiBoxProps & {
     flexBox?: boolean;
@@ -9,7 +10,7 @@ type BoxProps = MuiBoxProps & {
     flexCenter?: boolean;
 };
 
-export default function Box(props: BoxProps) {
+const Box = forwardRef(function Box(props: BoxProps, ref) {
     const { sx: sxFromProps, flexBox, flexColumn, flexCenter, ...rest } = props;
     return (
         <MuiBox
@@ -20,8 +21,11 @@ export default function Box(props: BoxProps) {
                 ...(Array.isArray(sxFromProps) ? sxFromProps : [sxFromProps])
             ]}
             {...rest}
+            ref={ref}
         >
             {props.children}
         </MuiBox>
     );
-}
+});
+
+export default Box;

@@ -28,6 +28,9 @@ const sx: SxClasses = {
         borderColor: 'text.secondary',
         mr: 2
     },
+    title: {
+        flex: '1 1 auto'
+    },
     onboardingContainer: (theme) => ({
         pt: 4,
         px: 3,
@@ -63,23 +66,64 @@ const sx: SxClasses = {
         bgcolor: 'primary.main',
         borderRadius: '8px'
     },
-    filterFeedbackContainer: {
+    uploadButton: {
+        height: '3rem',
+        borderRadius: '999rem',
+        fontSize: '14px',
+        fontWeight: '600',
+        letterSpacing: '1px',
+        '&:hover': { bgcolor: 'primary.light' }
+    },
+    loadingContainer: {
         alignItems: 'stretch',
         width: '100%'
     },
-    filterFeedbackText: {
+    loadingText: {
         fontSize: '16px',
         lineHeight: '20px',
         fontWeight: '500',
         color: 'text.primary',
         textAlign: 'center',
-        mb: 1
+        mb: 1.5
     },
     videoGrid: {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
         gap: '16px',
         marginTop: '16px'
+    },
+    modalContainer: (theme) => ({
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '30rem',
+        maxWidth: '90vw',
+        bgcolor: 'background.paper',
+        borderRadius: '4px',
+        boxShadow: 24,
+        p: 2,
+        [theme.breakpoints.up('md')]: {
+            p: 4
+        }
+    }),
+    modalTitle: {
+        pb: 5
+    },
+    form: {
+        width: '100%',
+        mb: 4
+    },
+    modalButtonContainer: {
+        mt: 6,
+        gap: 2
+    },
+    modalButton: (theme) => ({
+        textTransform: 'none',
+        '&:hover': { bgcolor: `${theme.palette.secondary.main}22` }
+    }),
+    mainModalButton: {
+        color: 'text.primary'
     }
 };
 
