@@ -101,6 +101,9 @@ export default function UploadModal(props: UploadModalProps) {
                         disableClearable
                         value={tagsValue}
                         onChange={(_event, value) => setTagsValue(value)}
+                        ChipProps={{
+                            sx: sx.chip
+                        }}
                         renderInput={(params) => (
                             <TextField
                                 {...params}

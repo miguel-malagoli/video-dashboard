@@ -7,6 +7,7 @@ import {
     CardContent,
     CardHeader,
     CardMedia,
+    Chip,
     ClickAwayListener,
     Grow,
     Icon,
@@ -147,9 +148,7 @@ export default function VideoCard(props: VideoCardProps) {
                     </Typography>
                     <Box flexBox sx={sx.tagFlex}>
                         {props.data.tags.map((tag) => (
-                            <Typography key={tag} sx={sx.tag}>
-                                {tag}
-                            </Typography>
+                            <Chip key={tag} label={tag} sx={sx.tag} />
                         ))}
                     </Box>
                 </CardContent>

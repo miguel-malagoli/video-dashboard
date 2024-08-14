@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 
-let themeGray = createTheme({
+let theme = createTheme({
     palette: {
         primary: {
             main: '#1cbaa6',
@@ -37,62 +37,62 @@ let themeGray = createTheme({
         }
     }
 });
-themeGray = createTheme(themeGray, {
+theme = createTheme(theme, {
     typography: {
         h1: {
             fontSize: '32px',
             lineHeight: '40px',
             fontWeight: '700',
-            color: themeGray.palette.text.primary
+            color: theme.palette.text.primary
         },
         h2: {
             fontSize: '20px',
             lineHeight: '32px',
             fontWeight: '500',
-            color: themeGray.palette.text.primary
+            color: theme.palette.text.primary
         },
         h3: {
             fontSize: '17px',
             lineHeight: '20px',
             fontWeight: '400',
-            color: themeGray.palette.text.primary
+            color: theme.palette.text.primary
         },
         subtitle1: {
             fontSize: '12px',
             lineHeight: '12px',
             fontWeight: '400',
             letterSpacing: '0.22px',
-            color: themeGray.palette.text.secondary
+            color: theme.palette.text.secondary
         },
         body1: {
             fontSize: '14px',
             lineHeight: '24px',
             fontWeight: '400',
-            color: themeGray.palette.text.primary
+            color: theme.palette.text.primary
         },
         body2: {
             fontSize: '14px',
             lineHeight: '24px',
             fontWeight: '500',
-            color: themeGray.palette.text.secondary
+            color: theme.palette.text.secondary
         }
     },
     components: {
         MuiOutlinedInput: {
             styleOverrides: {
                 notchedOutline: {
-                    borderColor: themeGray.palette.text.secondary
+                    borderColor: theme.palette.text.secondary
                 }
             }
         },
         MuiInputAdornment: {
             styleOverrides: {
                 root: {
-                    color: themeGray.palette.text.primary
+                    color: theme.palette.text.primary
                 }
             }
         }
     }
 });
 
-export default themeGray;
+export default theme;
