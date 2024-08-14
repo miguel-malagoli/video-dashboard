@@ -7,6 +7,7 @@ import {
     IconButton,
     InputAdornment,
     LinearProgress,
+    Snackbar,
     TextField
 } from '@mui/material';
 // components
@@ -40,6 +41,7 @@ export default function VideoListSection() {
         useState<VideoData[]>(mockVideoList);
     const [uploadFile, setUploadFile] = useState<File | undefined>();
     const [videoAction, setVideoAction] = useState<VideoAction | undefined>();
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [loadingList, setLoadingList] = useState(false);
 
     const sidebar = useContext(SidebarContext);
@@ -214,6 +216,7 @@ export default function VideoListSection() {
                         )
                     );
                     setVideoAction(undefined);
+                    setSnackbarMessage('Item removed successfully');
                 }}
             />
             <ShareModal
@@ -221,6 +224,26 @@ export default function VideoListSection() {
                 videoData={videoAction?.video}
                 onCancel={() => setVideoAction(undefined)}
                 onShare={() => {}}
+            />
+            <Snackbar
+                open={!!snackbarMessage}
+                autoHideDuration={5000}
+                onClose={() => setSnackbarMessage('')}
+                message={snackbarMessage}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
+                action={
+                    <IconButton
+                        size="small"
+                        aria-label="close"
+                        color="inherit"
+                        onClick={() => setSnackbarMessage('')}
+                    >
+                        <Icon>close</Icon>
+                    </IconButton>
+                }
             />
         </Box>
     );

@@ -1,19 +1,18 @@
 // react
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // 3rd party
 import {
     Icon,
     IconButton,
     InputAdornment,
     LinearProgress,
+    Snackbar,
     TextField
 } from '@mui/material';
 // components
 import VideoCard from '@components/VideoCard';
 import Box from '@components/Box';
 import Typography from '@components/Typography';
-// contexts
-import { SidebarContext } from '@contexts/SidebarContext';
 // utils
 import { mockResponseTime } from '@utils/mockResponseTime';
 import { VideoData } from '@utils/data';
@@ -39,9 +38,8 @@ export default function ReviewListSection() {
         useState<VideoData[]>(mockReviewList);
     const [uploadFile, setUploadFile] = useState<File | undefined>();
     const [videoAction, setVideoAction] = useState<VideoAction | undefined>();
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [loadingList, setLoadingList] = useState(false);
-
-    const sidebar = useContext(SidebarContext);
 
     const filterList = useCallback(async () => {
         setLoadingList(true);
@@ -67,30 +65,6 @@ export default function ReviewListSection() {
     return (
         <Box component="section" sx={sx.baseContainer}>
             <Box flexBox sx={sx.titleFlex}>
-                <IconButton
-                    aria-label="open navigation"
-                    onClick={() => sidebar.setIsOpenMobile(true)}
-                    sx={[sx.sidebarButton, { display: { lg: 'none' } }]}
-                >
-                    <Icon>menu</Icon>
-                </IconButton>
-                <IconButton
-                    aria-label="open navigation"
-                    onClick={() => sidebar.setIsOpenDesktop(true)}
-                    sx={[
-                        sx.sidebarButton,
-                        {
-                            display: {
-                                xs: 'none',
-                                lg: sidebar.isOpenDesktop
-                                    ? 'none'
-                                    : 'inline-flex'
-                            }
-                        }
-                    ]}
-                >
-                    <Icon>menu</Icon>
-                </IconButton>
                 <Typography variant="h1">Reviews by me</Typography>
             </Box>
             <TextField
@@ -180,6 +154,7 @@ export default function ReviewListSection() {
                         )
                     );
                     setVideoAction(undefined);
+                    setSnackbarMessage('Item removed successfully');
                 }}
             />
             <ShareModal
@@ -187,6 +162,26 @@ export default function ReviewListSection() {
                 videoData={videoAction?.video}
                 onCancel={() => setVideoAction(undefined)}
                 onShare={() => {}}
+            />
+            <Snackbar
+                open={!!snackbarMessage}
+                autoHideDuration={5000}
+                onClose={() => setSnackbarMessage('')}
+                message={snackbarMessage}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
+                action={
+                    <IconButton
+                        size="small"
+                        aria-label="close"
+                        color="inherit"
+                        onClick={() => setSnackbarMessage('')}
+                    >
+                        <Icon>close</Icon>
+                    </IconButton>
+                }
             />
         </Box>
     );

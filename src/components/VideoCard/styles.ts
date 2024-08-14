@@ -61,9 +61,7 @@ const sx: SxClasses = {
         letterSpacing: '0.3px',
         color: 'text.secondary',
         bgcolor: 'background.paper',
-        borderRadius: '999rem',
-        py: 0.75,
-        px: 1.25
+        height: '1.75rem'
     },
     menuItem: {
         height: '40px',

@@ -16,20 +16,21 @@ const sx: SxClasses = {
         }
     }),
     titleFlex: {
+        flexWrap: 'wrap',
         alignItems: 'center',
         my: 2.5,
-        pb: 2
+        pb: 2,
+        gap: 2
     },
     sidebarButton: {
         width: 40,
         height: 40,
         color: 'text.secondary',
         border: 1,
-        borderColor: 'text.secondary',
-        mr: 2
+        borderColor: 'text.secondary'
     },
     title: {
-        flex: '1 1 auto'
+        flex: '1 0 auto'
     },
     onboardingContainer: (theme) => ({
         pt: 4,
@@ -114,6 +115,9 @@ const sx: SxClasses = {
         width: '100%',
         mb: 4
     },
+    chip: (theme) => ({
+        bgcolor: `${theme.palette.common.white}22`
+    }),
     modalButtonContainer: {
         mt: 6,
         gap: 2

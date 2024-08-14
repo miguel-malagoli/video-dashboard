@@ -92,6 +92,9 @@ export default function EditModal(props: EditModalProps) {
                         disableClearable
                         value={tagsValue}
                         onChange={(_event, value) => setTagsValue(value)}
+                        ChipProps={{
+                            sx: sx.chip
+                        }}
                         renderInput={(params) => (
                             <TextField
                                 {...params}

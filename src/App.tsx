@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@mui/material';
 import SidebarProvider from '@contexts/SidebarContext';
 import AppRoutes from '@pages/AppRoutes';
-import themeGray from '@utils/theme';
+import theme from '@utils/theme';
 
 function App() {
     return (
-        <ThemeProvider theme={themeGray}>
+        <ThemeProvider theme={theme}>
             <SidebarProvider>
                 <AppRoutes />
             </SidebarProvider>
